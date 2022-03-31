@@ -26,6 +26,17 @@ router.get("/:id", (req, res) => {
     res.send(userFound)
 })
 
+// * update a user
+router.patch("/:id", (req, res) => {
+    const userID = req.params.id;
+    const { name, age } = req.body;
+    const userFound = dummyUsers.find((user) => user._id == userID)
+    if (name) { userFound.name = name }
+    if (age) { userFound.age = age }
+    res.send("user data updated")
+    console.log(userFound)
+})
+
 // * deleting a user
 //  since there is no actual DB. 
 // We will return a new copy of dummyUsers excluding the incoming ID 
