@@ -1,6 +1,6 @@
 // imports
 import express from "express"
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import dummyUsers from "./dummyData.js"
 // router init
 const router = express.Router()
@@ -26,7 +26,16 @@ router.get("/:id", (req, res) => {
     res.send(userFound)
 })
 
-// console.log(uuidv4())
+// * deleting a user
+//  since there is no actual DB. 
+// We will return a new copy of dummyUsers excluding the incoming ID 
+router.delete("/:id", (req, res) => {
+    const userDel = req.params.id
+    const remainingUser = dummyUsers.filter((user) => {
+        return (user._id !== userDel)
+    })
+    res.send(remainingUser)
+})
 
-// export router
+// export the router
 export default router;
